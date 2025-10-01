@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Chat - Mini Agentic Bot{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="fas fa-comments me-2"></i>Chat with Agentic Bot
+                </h4>
+            </div>
+            <div class="card-body">
+                <div id="chat-container" class="chat-container">
+                    <div class="welcome-message">
+                        <div class="alert alert-info">
+                            <h6><i class="fas fa-info-circle me-2"></i>How to use:</h6>
+                            <ul class="mb-0">
+                                <li><strong>Read Operations:</strong> "Show all users", "List active projects"</li>
+                                <li><strong>Create Operations:</strong> "Create a new user", "Add a project" (requires approval)</li>
+                                <li><strong>Update Operations:</strong> "Update user email", "Modify project" (requires approval)</li>
+                                <li><strong>Delete Operations:</strong> "Delete user", "Remove project" (requires approval)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="chat-messages"></div>
+                </div>
+                
+                <div class="chat-input-container mt-3">
+                    <form id="chat-form" class="d-flex">
+                        <input type="text" id="user-query" class="form-control me-2" 
+                               placeholder="Ask me anything about users or projects..." required>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane me-1"></i>Send
+                        </button>
+                    </form>
+                    <div class="quick-actions mt-2">
+                        <small class="text-muted">Quick actions:</small>
+                        <button class="btn btn-sm btn-outline-secondary me-1" onclick="quickAction('Show all users')">
+                            Show Users
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary me-1" onclick="quickAction('Show active projects')">
+                            Active Projects
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary me-1" onclick="quickAction('Create a new user named Alex')">
+                            Create User
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Data Summary -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0"><i class="fas fa-users me-2"></i>Users Summary</h6>
+                    </div>
+                    <div class="card-body">
+                        <div id="users-summary">Loading...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0"><i class="fas fa-project-diagram me-2"></i>Projects Summary</h6>
+                    </div>
+                    <div class="card-body">
+                        <div id="projects-summary">Loading...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function quickAction(query) {
+    document.getElementById('user-query').value = query;
+    document.getElementById('chat-form').dispatchEvent(new Event('submit', {bubbles: true}));
+}
+
+// Load initial data
+document.addEventListener('DOMContentLoaded', function() {
+    loadDataSummary();
+});
+</script>
+{% endblock %}
