@@ -2,6 +2,7 @@
 
 A LangGraph + LangChain inspired agentic bot with a beautiful web UI that interacts with multiple mock databases and supports natural language CRUD operations with human-in-the-loop verification.
 
+## Live app: https://mini-agentic-bot.onrender.com
 ## 🚀 Features
 
 - **🤖 Intelligent Agent**: Natural language processing for database operations
